@@ -1,12 +1,14 @@
 package com.project.havebin.user.adapter.out.persistence.repository;
 
 import com.project.havebin.user.adapter.out.persistence.entity.UserJpaEntity;
+import com.project.havebin.user.domain.vo.Nickname;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
 public interface UserCustomRepository {
-    void save(UserJpaEntity userJpaEntity);
-
     List<UserJpaEntity> findAll();
+
+    void save(UserJpaEntity userJpaEntity);
+    boolean existsByUsername(Nickname nickname);
 }

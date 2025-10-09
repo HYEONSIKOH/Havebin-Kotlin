@@ -6,8 +6,10 @@ import com.project.havebin.user.adapter.out.persistence.repository.UserCustomRep
 import com.project.havebin.user.adapter.out.persistence.repository.UserRepository;
 import com.project.havebin.user.application.port.out.UserRepositoryPort;
 import com.project.havebin.user.domain.entity.User;
+import com.project.havebin.user.domain.vo.Nickname;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.implementation.Implementation;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -29,5 +31,10 @@ public class UserJpaRepositoryAdapter implements UserRepositoryPort {
         for (UserJpaEntity u : users) {
             log.info(u.getId() + " " + u.getExternalId().getValue() + " " + u.getEmail().getValue() + " " + u.getPassword().getValue() + " " + u.getNickname().getValue());
         }
+    }
+
+    @Override
+    public boolean duplicateNickname(Nickname nickname) {
+        return repository.existsByUsername(nickname);
     }
 }

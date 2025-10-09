@@ -2,10 +2,12 @@ package com.project.havebin.user.domain.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
-@Embeddable
 @Getter
+@Embeddable
+@EqualsAndHashCode(of = "value")
 public class Nickname {
     @Column(name = "nickname", unique = true, nullable = false)
     private String value;

@@ -1,6 +1,7 @@
 package com.project.havebin.user.adapter.out.persistence.repository;
 
 import com.project.havebin.user.adapter.out.persistence.entity.UserJpaEntity;
+import com.project.havebin.user.domain.vo.Nickname;
 import org.springframework.stereotype.Repository;
 
 import java.util.*;
@@ -8,6 +9,11 @@ import java.util.*;
 @Repository
 public class UserCustomRepositoryImpl implements UserCustomRepository {
     private static final List<UserJpaEntity> userTable = new ArrayList<>();
+
+    @Override
+    public List<UserJpaEntity> findAll() {
+        return userTable;
+    }
 
     @Override
     public void save(UserJpaEntity userJpaEntity) {
@@ -27,7 +33,13 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
     }
 
     @Override
-    public List<UserJpaEntity> findAll() {
-        return userTable;
+    public boolean existsByUsername(Nickname nickname) {
+        for (UserJpaEntity user : userTable) {
+            if (user.getNickname().equals(nickname)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

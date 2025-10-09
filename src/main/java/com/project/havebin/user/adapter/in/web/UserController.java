@@ -27,8 +27,8 @@ public class UserController {
 
     @PostMapping("/validateDuplicateNickname")
     @Operation(summary = "닉네임 중복검사")
-    public ResponseEntity<?> validateDuplicateNickname(@Valid @RequestBody DuplicateNicknameReqDto reqDto) {
-        return ResponseEntity.ok(reqDto);
+    public ResponseEntity<?> duplicateNickname(@Valid @RequestBody DuplicateNicknameReqDto reqDto) {
+        return ResponseEntity.ok(userUseCase.duplicateNickname(reqDto.toCommand()));
     }
 
     @DeleteMapping("/deleteUser")
@@ -45,12 +45,23 @@ public class UserController {
 
     //===================== [예외 처리] =====================
 
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<?> handleRuntimeException(RuntimeException ex) {
+        return ResponseEntity
+                .badRequest()
+                .body(Map.of(
+                        "message", ex.getMessage(),
+                        "status", 400
+                ));
+    }
+
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<?> handleIllegalArgument(IllegalArgumentException ex) {
         return ResponseEntity
                 .badRequest()
                 .body(Map.of(
-                        "message", ex.getMessage()
+                        "message", ex.getMessage(),
+                        "status", 401
                 ));
     }
 }

@@ -3,10 +3,10 @@ package com.project.havebin.user.application.port.in.response;
 import lombok.Getter;
 
 @Getter
-public class RegisterUserResponse {
+public class DuplicateNicknameResponse {
     private final String message;
 
-    public RegisterUserResponse() {
-        this.message = "Welcome HaveBin!!";
+    public DuplicateNicknameResponse() {
+        this.message = "Nickname Not Duplicate";
     }
 }
