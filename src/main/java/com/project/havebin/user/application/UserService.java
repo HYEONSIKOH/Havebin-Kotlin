@@ -3,6 +3,7 @@ package com.project.havebin.user.application;
 import com.project.havebin.user.application.port.in.UserUseCase;
 import com.project.havebin.user.application.port.in.command.CreateUser;
 import com.project.havebin.user.application.port.in.response.RegisterUserResponse;
+import com.project.havebin.user.application.port.out.UserRepositoryPort;
 import com.project.havebin.user.domain.entity.User;
 import com.project.havebin.user.domain.vo.Password;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserService implements UserUseCase {
 
+    private final UserRepositoryPort userRepositoryPort;
+
     @Override
     public RegisterUserResponse createUser(CreateUser command) {
         User user = new User();
@@ -22,6 +25,8 @@ public class UserService implements UserUseCase {
                 command.nickname(),
                 command.password()
         );
+
+        userRepositoryPort.save(user);
 
         return new RegisterUserResponse();
     }

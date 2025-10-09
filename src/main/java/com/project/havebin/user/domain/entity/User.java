@@ -13,6 +13,15 @@ public class User {
     private ProfileImagePath profileImagePath;
     private final RoleType roleType;
 
+    public User(UserNo id, Email email, Nickname nickname, Password password, ProfileImagePath profileImagePath, RoleType roleType) {
+        this.id = id;
+        this.email = email;
+        this.nickname = nickname;
+        this.password = password;
+        this.profileImagePath = profileImagePath;
+        this.roleType = roleType;
+    }
+
     public User() {
         this.id = new UserNo();
         this.roleType = RoleType.USER;

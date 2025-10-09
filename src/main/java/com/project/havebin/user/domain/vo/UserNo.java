@@ -2,13 +2,14 @@ package com.project.havebin.user.domain.vo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-@Embeddable
 @Getter
+@Embeddable
+@EqualsAndHashCode(of = "value")
 public class UserNo {
     @Column(name = "external_id", unique = true, nullable = true)
     private String value;
