@@ -3,7 +3,9 @@ package com.project.havebin.user.application.port.in.command;
 import com.project.havebin.user.domain.vo.Email;
 import com.project.havebin.user.domain.vo.Nickname;
 import com.project.havebin.user.domain.vo.Password;
+import lombok.Builder;
 
+@Builder
 public record CreateUser(
         Email email,
         Password password,

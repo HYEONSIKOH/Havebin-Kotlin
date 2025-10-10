@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 public class UserMapper {
     // 도메인 → JPA (신규 생성용)
     public static UserJpaEntity toJpa(User domain) {
+        if (domain == null) { return null; }
+
         return UserJpaEntity.builder()
                 .externalId(domain.getId())
                 .email(domain.getEmail())
@@ -20,6 +22,8 @@ public class UserMapper {
 
     // JPA → 도메인 (복원용)
     public static User toDomain(UserJpaEntity e) {
+        if (e == null) { return null; }
+
         return new User(
                 e.getExternalId(),
                 e.getEmail(),

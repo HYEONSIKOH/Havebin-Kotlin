@@ -30,7 +30,9 @@ public class UserService implements UserUseCase {
                 command.password()
         );
 
-        userRepositoryPort.save(user);
+        if (userRepositoryPort.save(user) == null) {
+            throw new RuntimeException("User Save Fail");
+        }
 
         return new RegisterUserResponse();
     }

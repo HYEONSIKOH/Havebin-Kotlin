@@ -2,9 +2,11 @@ package com.project.havebin.user.domain.entity;
 
 import com.project.havebin.user.domain.enums.RoleType;
 import com.project.havebin.user.domain.vo.*;
+import lombok.Builder;
 import lombok.Getter;
 
 @Getter
+@Builder
 public class User {
     private final UserNo id;
     private Email email;

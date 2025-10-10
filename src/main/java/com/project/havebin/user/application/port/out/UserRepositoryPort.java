@@ -5,7 +5,7 @@ import com.project.havebin.user.domain.entity.User;
 import com.project.havebin.user.domain.vo.Nickname;
 
 public interface UserRepositoryPort {
-    void save(User user);
+    User save(User user);
 
     boolean duplicateNickname(Nickname nickname);
 

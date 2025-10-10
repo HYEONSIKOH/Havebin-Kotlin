@@ -9,7 +9,7 @@ import java.util.*;
 public interface UserCustomRepository {
     List<UserJpaEntity> findAll();
 
-    void save(UserJpaEntity userJpaEntity);
+    UserJpaEntity save(UserJpaEntity userJpaEntity);
     boolean existsByUsername(Nickname nickname);
     Optional<UserJpaEntity> findById(Long id);
 }

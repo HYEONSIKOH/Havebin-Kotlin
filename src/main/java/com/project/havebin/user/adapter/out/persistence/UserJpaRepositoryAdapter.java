@@ -23,15 +23,15 @@ public class UserJpaRepositoryAdapter implements UserRepositoryPort {
     private final UserCustomRepository repository;
 
     @Override
-    public void save(User user) {
+    public User save(User user) {
         UserJpaEntity userJpaEntity = UserMapper.toJpa(user);
 
-        repository.save(userJpaEntity);
+//        List<UserJpaEntity> users= repository.findAll();
+//        for (UserJpaEntity u : users) {
+//            log.info(u.getId() + " " + u.getExternalId().getValue() + " " + u.getEmail().getValue() + " " + u.getPassword().getValue() + " " + u.getNickname().getValue());
+//        }
 
-        List<UserJpaEntity> users= repository.findAll();
-        for (UserJpaEntity u : users) {
-            log.info(u.getId() + " " + u.getExternalId().getValue() + " " + u.getEmail().getValue() + " " + u.getPassword().getValue() + " " + u.getNickname().getValue());
-        }
+        return UserMapper.toDomain(repository.save(userJpaEntity));
     }
 
     @Override
