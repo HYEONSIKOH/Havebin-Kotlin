@@ -13,6 +13,7 @@ import net.bytebuddy.implementation.Implementation;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Repository
@@ -36,5 +37,14 @@ public class UserJpaRepositoryAdapter implements UserRepositoryPort {
     @Override
     public boolean duplicateNickname(Nickname nickname) {
         return repository.existsByUsername(nickname);
+    }
+
+    @Override
+    public User getUserDataById(Long id) {
+        Optional<UserJpaEntity> userJpaEntityOptional = repository.findById(id);
+
+        return userJpaEntityOptional
+                .map(entity -> UserMapper.toDomain(entity))
+                .orElse(null);
     }
 }

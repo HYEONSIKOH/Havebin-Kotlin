@@ -3,6 +3,7 @@ package com.project.havebin.user.adapter.in.web;
 import com.project.havebin.user.adapter.in.web.dto.request.DuplicateNicknameReqDto;
 import com.project.havebin.user.adapter.in.web.dto.request.UserSignReqDto;
 import com.project.havebin.user.application.port.in.UserUseCase;
+import com.project.havebin.user.application.port.in.command.GetUserData;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -21,7 +22,7 @@ public class UserController {
 
     @PostMapping("/responseUserInfo")
     @Operation(summary = "회원가입")
-    public ResponseEntity<?> responseUserInfo(@Valid @RequestBody UserSignReqDto reqDto) {
+    public ResponseEntity<?> createUser(@Valid @RequestBody UserSignReqDto reqDto) {
         return ResponseEntity.ok(userUseCase.createUser(reqDto.toCommand()));
     }
 
@@ -38,9 +39,10 @@ public class UserController {
     }
 
     @GetMapping("/getUserdata")
-    @Operation(summary = "유저 정보 조회")
-    public ResponseEntity<?> getUserdata(/*@AuthenticationPrincipal Long id*/) {
-        return ResponseEntity.ok("Not Implemented");
+    @Operation(summary = "유저 정보 조회", description = "(로그인 기능 미완성) 임시로 1번 유저만 조회")
+    public ResponseEntity<?> getUserData(/*@AuthenticationPrincipal Long id*/) {
+        Long id = 1L; // 로그인 기능 미완성
+        return ResponseEntity.ok(userUseCase.getUserData(new GetUserData(id)));
     }
 
     //===================== [예외 처리] =====================

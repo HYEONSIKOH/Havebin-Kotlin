@@ -8,4 +8,6 @@ public interface UserRepositoryPort {
     void save(User user);
 
     boolean duplicateNickname(Nickname nickname);
+
+    User getUserDataById(Long id);
 }

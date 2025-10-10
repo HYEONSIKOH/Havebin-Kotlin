@@ -1,8 +1,10 @@
 package com.project.havebin.user.application;
 
+import com.project.havebin.user.adapter.in.web.dto.response.GetUserDataResDto;
 import com.project.havebin.user.application.port.in.UserUseCase;
 import com.project.havebin.user.application.port.in.command.CreateUser;
 import com.project.havebin.user.application.port.in.command.DuplicateNickname;
+import com.project.havebin.user.application.port.in.command.GetUserData;
 import com.project.havebin.user.application.port.in.response.DuplicateNicknameResponse;
 import com.project.havebin.user.application.port.in.response.RegisterUserResponse;
 import com.project.havebin.user.application.port.out.UserRepositoryPort;
@@ -40,5 +42,21 @@ public class UserService implements UserUseCase {
         }
 
         return new DuplicateNicknameResponse();
+    }
+
+    @Override
+    public GetUserDataResDto getUserData(GetUserData command) {
+        User user = userRepositoryPort.getUserDataById(command.id());
+
+        if (user == null) {
+            throw new RuntimeException("No User Data");
+        }
+
+        return new GetUserDataResDto(
+                user.getEmail().getValue(),
+                user.getNickname().getValue(),
+                user.getProfileImagePath().getValue(),
+                user.getRoleType().name()
+        );
     }
 }

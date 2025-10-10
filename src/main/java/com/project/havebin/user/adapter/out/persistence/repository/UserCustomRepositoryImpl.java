@@ -42,4 +42,14 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
 
         return false;
     }
+
+    @Override
+    public Optional<UserJpaEntity> findById(Long id) {
+        for (UserJpaEntity user : userTable) {
+            if (user.getId().equals(id))
+                return Optional.of(user);
+        }
+
+        return Optional.empty();
+    }
 }
