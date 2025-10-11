@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 
 @Getter
-@Builder
 public class User {
     private final UserNo id;
     private Email email;
@@ -15,8 +14,9 @@ public class User {
     private ProfileImagePath profileImagePath;
     private final RoleType roleType;
 
-    public User(UserNo id, Email email, Nickname nickname, Password password, ProfileImagePath profileImagePath, RoleType roleType) {
-        this.id = id;
+    @Builder
+    public User(Email email, Nickname nickname, Password password, ProfileImagePath profileImagePath, RoleType roleType) {
+        this.id = new UserNo();
         this.email = email;
         this.nickname = nickname;
         this.password = password;

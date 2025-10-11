@@ -12,4 +12,6 @@ public interface UserCustomRepository {
     UserJpaEntity save(UserJpaEntity userJpaEntity);
     boolean existsByUsername(Nickname nickname);
     Optional<UserJpaEntity> findById(Long id);
+
+    boolean existsByEmail(String email);
 }

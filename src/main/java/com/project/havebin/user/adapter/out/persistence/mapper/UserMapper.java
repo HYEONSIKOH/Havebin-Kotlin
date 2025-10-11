@@ -2,6 +2,10 @@ package com.project.havebin.user.adapter.out.persistence.mapper;
 
 import com.project.havebin.user.adapter.out.persistence.entity.UserJpaEntity;
 import com.project.havebin.user.domain.entity.User;
+import com.project.havebin.user.domain.vo.Email;
+import com.project.havebin.user.domain.vo.Nickname;
+import com.project.havebin.user.domain.vo.Password;
+import com.project.havebin.user.domain.vo.ProfileImagePath;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
@@ -11,11 +15,10 @@ public class UserMapper {
         if (domain == null) { return null; }
 
         return UserJpaEntity.builder()
-                .externalId(domain.getId())
-                .email(domain.getEmail())
-                .nickname(domain.getNickname())
-                .password(domain.getPassword())
-                .profileImagePath(domain.getProfileImagePath())
+                .email(domain.getEmail().getValue())
+                .nickname(domain.getNickname().getValue())
+                .password(domain.getPassword().getValue())
+                .profileImagePath(domain.getProfileImagePath().getValue())
                 .roleType(domain.getRoleType())
                 .build();
     }
@@ -25,11 +28,10 @@ public class UserMapper {
         if (e == null) { return null; }
 
         return new User(
-                e.getExternalId(),
-                e.getEmail(),
-                e.getNickname(),
-                e.getPassword(),
-                e.getProfileImagePath(),
+                new Email(e.getEmail()),
+                new Nickname(e.getNickname()),
+                new Password(e.getPassword()),
+                new ProfileImagePath(e.getProfileImagePath()),
                 e.getRoleType()
         );
     }

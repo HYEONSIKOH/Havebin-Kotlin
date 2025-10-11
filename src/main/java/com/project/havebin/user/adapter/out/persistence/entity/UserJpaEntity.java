@@ -19,26 +19,22 @@ public class UserJpaEntity {
     private Long id;
 
     @Embedded
-    private UserNo externalId;
+    private String email;
 
     @Embedded
-    private Email email;
+    private String nickname;
 
     @Embedded
-    private Nickname nickname;
+    private String password;
 
     @Embedded
-    private Password password;
-
-    @Embedded
-    private ProfileImagePath profileImagePath;
+    private String profileImagePath;
 
     @Embedded
     private RoleType roleType;
 
     @Builder
-    public UserJpaEntity(UserNo externalId, Email email, Nickname nickname, Password password, ProfileImagePath profileImagePath, RoleType roleType) {
-        this.externalId = externalId;
+    public UserJpaEntity(String email, String nickname, String password, String profileImagePath, RoleType roleType) {
         this.email = email;
         this.nickname = nickname;
         this.password = password;

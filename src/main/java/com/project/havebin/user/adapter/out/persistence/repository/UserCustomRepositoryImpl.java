@@ -54,4 +54,15 @@ public class UserCustomRepositoryImpl implements UserCustomRepository {
 
         return Optional.empty();
     }
+
+    @Override
+    public boolean existsByEmail(String email) {
+        for (UserJpaEntity user : userTable) {
+            if (user.getEmail().equals(email)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
